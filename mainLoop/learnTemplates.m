@@ -265,11 +265,14 @@ for ibatch = 1:niter
         if ops.fig
             try
                 if ibatch==1
-                    figHand = figure;
+                    figHand = figure('visible','off');
                 else
-                    figure(figHand);
+                    set(0, 'CurrentFigure', figHand);
                 end
-                make_fig(W, U, mu, nsp)           
+                make_fig(W, U, mu, nsp);
+                % save fig with ibatch
+                figname = sprintf('fig2-i%05d.jpg',ibatch);
+                saveas(figHand,fullfile(ops.figsdir, figname),'jpg');
             catch ME
                warning('Error making figure was: %s',ME.message);
             end

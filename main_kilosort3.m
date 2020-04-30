@@ -15,10 +15,14 @@ ops.NchanTOT  = 32; % total number of channels in your recording
 
 % find the binary file
 rootZ = strcat(pwd,'/out/');
+ops.rootZ = rootZ;
+ops.figsdir=strcat(rootZ,'/figs');
+mkdir(ops.figsdir);
+
 fprintf('Looking for data inside %s \n', rootZ)
 chanMapFile = 'chanMap.mat';
-ops.chanMap = fullfile(rootZ, chanMapFile);
 fs          = 'continuous.dat';
+ops.chanMap = fullfile(rootZ, chanMapFile);
 ops.fbinary = fullfile(rootZ, fs);
 
 %% this block runs all the steps of the algorithm
