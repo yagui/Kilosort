@@ -11,8 +11,7 @@ tempnum = pad(getenv('SLURM_JOBID'),8,'left','0');
 ops.fproc  = fullfile(rootH, ['temp_wh_' tempnum '.dat']); % proc file on a fast SSD
 disp(ops.fproc)
 
-ops.trange    = [0 Inf]; % time range to sort
-ops.NchanTOT  = 32; % total number of channels in your recording
+ops.trange = [0 Inf]; % time range to sort
 
 % the binary file is in this folder
 rootZ = strcat(pwd,'/out/');
