@@ -68,11 +68,9 @@ if isfield(cmIn, 'connected') && ~isempty(cmIn.connected)
     ycoords = ycoords(connected);
     
     kcoords = kcoords(connected);
-    
-    NchanTOT = sum(connected);
 end
 
 if ~exist('NchanTOT', 'var')
-   NchanTOT = numel(chanMap); 
+   NchanTOT = numel(connected); 
 end
 

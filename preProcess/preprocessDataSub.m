@@ -12,6 +12,9 @@ tic;
 ops.nt0 	  = getOr(ops, {'nt0'}, 61); % number of time samples for the templates (has to be <=81 due to GPU shared memory)
 ops.nt0min  = getOr(ops, 'nt0min', ceil(20 * ops.nt0/61)); % time sample where the negative peak should be aligned
 
+[chanMap, xc, yc, kcoords, NchanTOTdefault] = loadChanMap(ops.chanMap); % function to load channel map file
+ops.NchanTOT = getOr(ops, 'NchanTOT', NchanTOTdefault); % if NchanTOT was left empty, then overwrite with the default
+
 NT       = ops.NT ; % number of timepoints per batch
 NchanTOT = ops.NchanTOT; % total number of channels in the raw binary file, including dead, auxiliary etc
 
