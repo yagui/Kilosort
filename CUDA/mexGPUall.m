@@ -33,4 +33,4 @@
 
 % If you get uninterpretable errors, run again with verbose option -v, i.e. mexcuda -v largeArrayDims mexGetSpikes2.cu
 
-
+exit
