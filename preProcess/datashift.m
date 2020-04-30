@@ -54,11 +54,12 @@ else
     end
 end
 
-figure(193)
+h1=figure('visible','off');
 plot(imin * dd)
 drawnow
+saveas(h1,fullfile(ops.figsdir, 'imindd.jpg'),'jpg');
 
-figure;
+h2=figure('visible','off');
 st_shift = st3(:,2); %+ imin(batch_id)' * dd;
 for j = spkTh:100
    ix = st3(:, 3)==j; % the amplitudes are rounded to integers
@@ -66,6 +67,7 @@ for j = spkTh:100
    hold on
 end
 axis tight
+saveas(h2,fullfile(ops.figsdir, 'st_shift.jpg'),'jpg');
 
 dshift = imin * dd;
 
