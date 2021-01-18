@@ -17,7 +17,7 @@
 #include <iostream>
 using namespace std;
 
-const int  Nthreads = 1024,  NrankMax = 6, maxFR = 10000, nt0max=81, NchanMax = 17, nsizes = 5;
+const int  Nthreads = 1024,  NrankMax = 6, maxFR = 10000, nsizes = 5;
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ __global__ void  sumChannels(const double *Params, const float *data,
 	float *datasum, int *kkmax, const int *iC, const float *dist, const float *v2){
     
   int tid, tid0,t,k, kmax, bidx, bidy, NT, Nchan, NchanNear,j,iChan, Nsum, Nrank;
-  float  Cmax, C0;
+  float  Cmax;
   float a[nsizes], d2;
   float  sigma;
   volatile __shared__ float  sA[nsizes * 20];
@@ -186,21 +186,17 @@ __global__ void  maxChannels(const double *Params, const float *dataraw, const f
 	const int *iC,  const int *iC2, const float *dist2, const int *kkmax, 
         const float *dfilt, int *st, int *counter, float *cF){
     
-  int nt0, indx, tid, tid0, i, bid, NT, j,iChan, nt0min, Nrank, kfilt;
-  int Nchan, NchanNear, NchanUp, NchanNearUp, bidy ;
+  int nt0, indx, tid, tid0, i, bid, NT, j,iChan, nt0min;
+  int NchanNearUp, bidy ;
   double Cf, d;
-  float spkTh, d2;
+  float spkTh; 
   bool flag;
  
   NT 		= (int) Params[0];
-  Nchan     = (int) Params[1];  
-  NchanNear = (int) Params[3];    
-  NchanUp     = (int) Params[7];  
   NchanNearUp = (int) Params[8];    
   nt0       = (int) Params[2];      
   nt0min    = (int) Params[5];
   spkTh    = (float) Params[6];
-  Nrank     = (int) Params[4];
   
   tid 		= threadIdx.x;
   bid 		= blockIdx.x;
@@ -254,13 +250,12 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
   /* Declare input variables*/
   double *Params, *d_Params;
-  unsigned int nt0, NT, Nchan, NchanNear, Nrank, NchanUp;
+  unsigned int NT, Nchan, NchanNear, Nrank, NchanUp;
   
   /* read Params and copy to GPU */
   Params  	= (double*) mxGetData(prhs[0]);
   NT		= (unsigned int) Params[0]; // 0
   Nchan     = (unsigned int) Params[1]; // 9
-  nt0       = (unsigned int) Params[2];  // 4
   NchanNear  = (unsigned int) Params[3]; // 5
   Nrank     = (unsigned int) Params[4]; // 14
   NchanUp     = (unsigned int) Params[7]; // 14
