@@ -1,7 +1,7 @@
 %% you need to change most of the paths in this block
 
 base_path = '/home/gridsan/aburman/kilosort/';
-addpath(genpath(strcat(base_path,'Kilosort2'))) % path to kilosort folder
+addpath(genpath(strcat(base_path,'Kilosort'))) % path to kilosort folder
 addpath(strcat(base_path,'npy-matlab/npy-matlab'))
 
 pathToYourConfigFile = pwd; % take from Github folder and put it somewhere else (together with the master_file)
